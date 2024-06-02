@@ -1,25 +1,25 @@
-// App header 
+<script setup lang="ts">
+const route = useRoute()
 
-import { defineComponent } from 'vue'
-import { useRouter } from 'vue-router'
-
-export default defineComponent({
-  setup() {
-    const router = useRouter()
-
-    return {
-      router
-    }
+const links = [
+  {
+    label: 'Останні епізоди',
+    labelClass: 'flex justify-around pb-4 text-2xl font-bold',
+    to: '/'
+  },
+  {
+    label: 'Хто ми такі',
+    labelClass: 'flex justify-around pb-4 text-2xl font-bold',
+    to: '/about'
   }
-})
+]
+</script>
 
 <template>
-  <header>
-    <h1>App Header</h1>
-    <nav>
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
-    </nav>
-  </header>
+  <div class="h-64 bg-gray-800 flex flex-col justify-end">
+    <UHorizontalNavigation :links="links" class="text-white flex flex-col justify-between"/>
+  </div>
 </template>
 
+<style scoped>
+</style>
