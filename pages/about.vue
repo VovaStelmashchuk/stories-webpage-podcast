@@ -1,24 +1,11 @@
+<script setup lang="ts">
+</script>
+
 <template>
-  <div class="about bg-white">
+  <div class="p-8 m-4">
     <PodcastInfo/>
   </div>
 </template>
 
-<script>
-import PodcastInfo from '@/components/PodcastInfo.vue'
-
-export default {
-  components: {
-    PodcastInfo
-  }
-}
-</script>
-
 <style scoped>
-.about {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 </style>

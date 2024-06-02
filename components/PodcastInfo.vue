@@ -1,5 +1,5 @@
 <template>
-  <div class="podcast-info text-center text-green-500">
+  <div class="text-green-500 max-w-[1080px] mx-auto">
     <h1 class="text-4xl font-bold mb-4">{{ title }}</h1>
     <p class="text-xl text-gray-950">{{ description }}</p>
   </div>
@@ -17,16 +17,4 @@ export default {
 </script>
 
 <style scoped>
-.podcast-info {
-  text-align: center;
-}
-
-.podcast-info h1 {
-  font-size: 2em;
-  margin-bottom: 0.5em;
-}
-
-.podcast-info p {
-  font-size: 1.2em;
-}
 </style>

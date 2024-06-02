@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-3 gap-4 max-w-screen-lg mx-auto">
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4 max-w-screen-lg mx-auto">
     <EpisodeCard v-for="(episode, index) in episodes" :key="index" :episode="episode"/>
   </div>
 </template>
