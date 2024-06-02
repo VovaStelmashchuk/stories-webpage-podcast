@@ -18,7 +18,7 @@ export default {
     }
   },
   created() {
-    axios.get('http://localhost:3000/api/podcast-list')
+    axios.get(`/api/podcast-list`)
         .then(response => {
           this.episodes = response.data.podcasts
         })
