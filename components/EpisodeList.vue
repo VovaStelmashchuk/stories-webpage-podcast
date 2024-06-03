@@ -20,7 +20,7 @@ export default {
   created() {
     axios.get(`/api/podcast-list`)
         .then(response => {
-          this.episodes = response.data.podcasts
+          this.episodes = response.data.posts
         })
         .catch(error => {
           console.error(error)
