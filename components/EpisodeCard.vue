@@ -3,7 +3,7 @@
     <img :src="episode.image" alt="Podcast image" class="w-full h-64 object-cover rounded-t-lg">
     <div class="p-4">
       <h2 class="text-2xl font-bold mb-2 text-green-500">{{ episode.title }}</h2>
-      <p class="text-gray-700">{{ episode.description }}</p>
+      <p class="text-gray-700 line-clamp-5">{{ episode.description }}</p>
     </div>
   </div>
 </template>
