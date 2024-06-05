@@ -14,6 +14,7 @@ export default defineEventHandler(async (event) => {
         title: post.title,
         image: post.image_url,
         description: post.description,
+        slug: post.slug,
     }));
 
     return {
