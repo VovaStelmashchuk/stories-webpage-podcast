@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     const formattedPosts = posts.map(post => ({
         title: post.title,
         image: post.image_url,
-        description: post.parts.map(part => `${part.name}`).join(' ')
+        description: post.description,
     }));
 
     return {

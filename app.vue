@@ -1,12 +1,12 @@
 <script setup>
 useSeoMeta({
-  title: 'Meet Nuxt',
-  description: 'The Intuitive Vue Framework.'
+  title: 'Android Story podcast',
+  description: 'Тут є все що робить подкаст android story'
 })
 </script>
 
 <template>
-  <div id="app" class="h-screen w-screen">
+  <div id="app" class="max-h-full max-w-full">
     <AppHeader/>
     <NuxtPage/>
   </div>

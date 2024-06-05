@@ -1,9 +1,9 @@
 <template>
   <div class="bg-white rounded-lg shadow-md p-4 border-green-500">
-    <img :src="episode.image" alt="Podcast image" class="w-full h-64 object-cover rounded-t-lg">
-    <div class="p-4">
-      <h2 class="text-2xl font-bold mb-2 text-green-500">{{ episode.title }}</h2>
-      <p class="text-gray-700 line-clamp-5">{{ episode.description }}</p>
+    <img :src="episode.image" alt="Podcast image" class="square-image object-cover rounded-t-lg">
+    <div class="h-64 overflow-clip p-4">
+      <h2 class="text-xl font-bold mb-2 text-green-500">{{ episode.title }}</h2>
+      <div v-html="episode.description" class="text-black"></div>
     </div>
   </div>
 </template>
