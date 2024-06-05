@@ -8,9 +8,5 @@ export default defineNuxtConfig({
     tailwindcss: {
         exposeConfig: true,
         viewer: true,
-    },
-    ssr: true,
-    nitro: {
-        static: true,
-    },
+    }
 })
