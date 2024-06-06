@@ -8,6 +8,7 @@ interface IPost extends Document {
     slug: string;
     title: string;
     description: string;
+    type: string;
 }
 
 const PostSchema: Schema = new Schema({
@@ -15,7 +16,8 @@ const PostSchema: Schema = new Schema({
     publish_date: {type: Date, required: true},
     slug: {type: String, required: true},
     title: {type: String, required: true},
-    description: {type: String, required: true},
+    description: {type: String, required: false},
+    type: {type: String, required: true},
 });
 
 const Post = db.model<IPost>('Post', PostSchema, 'posts');

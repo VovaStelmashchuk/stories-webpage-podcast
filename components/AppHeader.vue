@@ -21,7 +21,7 @@ const links = [
       <a href="https://shows.acast.com/android-story" target="_blank"
          class="bg-blue-600 text-white px-6 py-3 text-lg rounded-lg mb-2 sm:mb-0 mx-4">Всі можливі RSS тут</a>
       <a href="https://www.patreon.com/androidstory" target="_blank"
-         class="bg-red-600 text-white px-6 py-3 text-lg rounded-lg mb-2 sm:mb-0 mx-4">Patreon</a>
+         class="bg-red-600 text-white px-6 py-3 text-lg rounded-lg mb-2 sm:mb-0 mx-4">Більше цікавого тут</a>
       <a href="https://www.youtube.com/channel/UC6-NFk4uOGsKvyisL1QC3rw" target="_blank"
          class="bg-red-600 text-white px-6 py-3 text-lg rounded-lg mx-4">YouTube</a>
     </div>

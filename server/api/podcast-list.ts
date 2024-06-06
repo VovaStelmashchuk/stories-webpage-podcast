@@ -8,13 +8,14 @@ export default defineEventHandler(async (event) => {
         }
     }
 
-    const posts = await Post.find()
+    const posts = await Post.find({type: {$in: ["public", "patreon"]}}).sort({publish_date: -1});
 
     const formattedPosts = posts.map(post => ({
         title: post.title,
         image: post.image_url,
         description: post.description,
         slug: post.slug,
+        type: post.type,
     }));
 
     return {
