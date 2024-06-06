@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import {defineProps, onMounted, ref} from 'vue';
-import axios from 'axios';
+import {defineProps} from 'vue';
 
 interface EpisodeDetails {
   title: string;
@@ -9,19 +8,8 @@ interface EpisodeDetails {
   slug: string;
 }
 
-const props = defineProps({
-  slug: String,
-});
-
-const episodeDetails = ref<EpisodeDetails | null>(null);
-
-onMounted(async () => {
-  try {
-    const response = await axios.get(`/api/podcast/${props.slug}`);
-    episodeDetails.value = response.data.podcast;
-  } catch (error) {
-    console.error(error);
-  }
+defineProps({
+  episodeDetails: Object as () => EpisodeDetails,
 });
 </script>
 
@@ -33,7 +21,7 @@ onMounted(async () => {
              :src="episodeDetails.image"
              alt="Android story logo">
       </div>
-      <div class="w-9/12 sm:w-full mx-auto px-4">
+      <div class="w-9/12 sm:w-full sm:p-0 sm:m-0 mx-auto-2 px-0">
         <h2 class="text-xl font-bold mb-2 text-green-500">{{ episodeDetails.title }}</h2>
         <div v-html="episodeDetails.description" class="text-black"></div>
       </div>
