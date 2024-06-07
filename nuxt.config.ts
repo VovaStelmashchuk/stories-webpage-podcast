@@ -5,6 +5,7 @@ export default defineNuxtConfig({
         '@nuxt/ui',
         '@nuxtjs/tailwindcss',
         'nuxt-gtag',
+        '@nuxtjs/robots',
     ],
     tailwindcss: {
         exposeConfig: true,
