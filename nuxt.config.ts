@@ -15,5 +15,11 @@ export default defineNuxtConfig({
     },
     gtag: {
         id: 'G-31X20G71GJ',
-    }
+    },
+    site: {
+        url: 'https://androidstory.dev',
+    },
+    sitemap: {
+        xsl: false
+    },
 })
