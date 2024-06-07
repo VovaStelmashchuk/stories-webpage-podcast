@@ -6,6 +6,8 @@ export default defineNuxtConfig({
         '@nuxtjs/tailwindcss',
         'nuxt-gtag',
         '@nuxtjs/robots',
+        '@nuxtjs/seo',
+        '@nuxtjs/sitemap',
     ],
     tailwindcss: {
         exposeConfig: true,
