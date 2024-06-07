@@ -4,7 +4,7 @@
       <div class="relative">
         <img :src="episode.image" alt="Podcast image" class="square-image object-cover rounded-t-lg blur-sm">
         <div
-            class="absolute top-32 left-16 right-16 h-12 flex items-center justify-center bg-red-600 text-white px-2 py-1 text-lg rounded-full">
+            class="absolute top-32 left-0 right-0 h-12 flex items-center justify-center bg-red-600 text-white px-2 py-1 text-lg rounded-full mx-2">
           Patreon special
         </div>
       </div>
