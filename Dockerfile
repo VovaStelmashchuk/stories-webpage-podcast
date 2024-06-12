@@ -1,10 +1,14 @@
-FROM node:20-alpine
+FROM node:20.14.0
 
-WORKDIR /app
-COPY . /app
+WORKDIR /usr/src/app
 
-RUN npm ci
-RUN nuxt build
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+RUN npm run build
+
 EXPOSE 3000
 
-CMD ["node", ".output/server/index.mjs"]
+CMD ["npm", "run", "production"]
