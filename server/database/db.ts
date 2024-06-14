@@ -1,3 +1,4 @@
+require('dotenv').config();
 import mongoose from 'mongoose';
 
 const uri = process.env.DB_URL;
@@ -6,6 +7,8 @@ if (!uri) {
     console.error('DB_URL not found in .env');
     process.exit(1);
 }
+
+console.log('Connecting to MongoDB... with URI:', uri);
 
 mongoose.connect(uri);
 
