@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-const uri = process.env.DB_URL;
+const config = useRuntimeConfig()
+
+const uri = config.dbUrl;
 
 if (!uri) {
     console.error('DB_URL not found in .env');

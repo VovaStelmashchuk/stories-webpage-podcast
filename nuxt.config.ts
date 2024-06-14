@@ -23,4 +23,7 @@ export default defineNuxtConfig({
     sitemap: {
         xsl: false
     },
+    runtimeConfig: {
+        dbUrl: '',
+    }
 })
