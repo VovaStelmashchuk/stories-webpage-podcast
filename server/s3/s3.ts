@@ -1,5 +1,4 @@
 import {HeadObjectCommand, PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
-import {addWebpackPlugin} from "@nuxt/kit";
 
 const config = useRuntimeConfig()
 
