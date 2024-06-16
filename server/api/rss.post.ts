@@ -3,14 +3,7 @@ import S3 from "~/server/s3/s3";
 import {Podcast} from "podcast";
 
 export default defineEventHandler(async (event) => {
-    if (event.method !== 'GET') {
-        return {
-            statusCode: 405,
-            body: 'Method Not Allowed'
-        };
-    }
-
-    const posts = await Post
+    const podcasts = await Post
         .find({type: {$in: ["public"]}})
         .sort({publish_date: -1});
 
@@ -20,7 +13,7 @@ export default defineEventHandler(async (event) => {
         description: 'Два андроїдщики, два Вови і деколи дві різні думки. Кожний подкаст ми обговорюємо нові релізи в світі android розробки, кращі і не дуже практики. Ділимося своїми думками, досвідом і деколи пробуємо не смішно жатрувати. Також тут ви знайдете рекомендації початківцям, а хто давно в розробці мають тут просто гарно провести час. Якщо вам тут сподобалося то заходьте в наш telegram chat https://t.me/androidstory_chat Якщо прям сильно сподобалося закиньте там трішки грошей. https://www.patreon.com/androidstory</p>',
         feedUrl: 'https://story-podcast.ams3.cdn.digitaloceanspaces.com/rss.xml',
         siteUrl: 'https://androidstory.dev',
-        imageUrl: 'https://assets.pippa.io/shows/62efce09bcb3d10013e2cc9b/show-cover.jpg',
+        imageUrl: 'https://story-podcast.ams3.cdn.digitaloceanspaces.com/logo.jpg',
         author: 'Vova and Vova',
         copyright: '© 2022 Android story',
         language: 'ua',
@@ -40,14 +33,16 @@ export default defineEventHandler(async (event) => {
                 text: 'Tech News',
             }],
         }],
-        itunesImage: 'https://assets.pippa.io/shows/62efce09bcb3d10013e2cc9b/show-cover.jpg',
+        itunesImage: 'https://story-podcast.ams3.cdn.digitaloceanspaces.com/logo.jpg',
     });
 
-    const fileSizes = await Promise.all(posts.map(post =>
+    const fileSizes = await Promise.all(podcasts.map(post =>
         S3.getFileSizeInByte('episodes/' + post.number + '.mp3')
     ));
 
-    posts.forEach((post, index) => {
+    const podcastCount = podcasts.length;
+
+    podcasts.forEach((post, index) => {
         let description = '';
         if (post.charters) {
             description = '<ul>';
@@ -59,7 +54,6 @@ export default defineEventHandler(async (event) => {
 
         let linkToEpisode = `https://androidstory.dev/podcast/${post.slug}`;
 
-// get mongo id as tring
         let guid = post.id.toString();
 
         let date = post.publish_date.toISOString();
@@ -81,8 +75,8 @@ export default defineEventHandler(async (event) => {
             itunesExplicit: false,
             itunesEpisodeType: 'full',
             itunesSeason: 2,
-            itunesEpisode: 111111111,
-            itunesImage: 'https://assets.pippa.io/shows/62efce09bcb3d10013e2cc9b/show-cover.jpg',
+            itunesEpisode: podcastCount - index,
+            itunesImage: 'https://story-podcast.ams3.cdn.digitaloceanspaces.com/logo.jpg',
             itunesAuthor: 'Vova and Vova',
             itunesSummary: post.description,
         });
