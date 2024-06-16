@@ -6,6 +6,7 @@ interface EpisodeDetails {
   image: string;
   description: string;
   slug: string;
+  charters: [{ time: string, description: string }];
 }
 
 defineProps({
@@ -23,7 +24,12 @@ defineProps({
       </div>
       <div class="w-9/12 sm:w-full sm:p-0 sm:m-0 mx-auto-2 px-0">
         <h2 class="text-xl font-bold mb-2 text-green-500">{{ episodeDetails.title }}</h2>
-        <div v-html="episodeDetails.description" class="text-black"></div>
+        <div v-for="chapter in episodeDetails.charters" :key="chapter.time" class="flex-none mr-5 mb-2">
+          <div class="flex">
+            <p class="text-green-500 font-bold mr-2">{{ chapter.time }}</p>
+            <p class="text-black">{{ chapter.description }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

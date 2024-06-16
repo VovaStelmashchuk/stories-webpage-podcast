@@ -1,6 +1,9 @@
 ### Get podcast list
 
-GET http://localhost:3001/api/podcast-list
+GET http://localhost:3000/api/podcast-list
+
+### Get podcast details
+GET http://localhost:3000/api/podcast/asp66-google-znovu-vchyt-nas-arkhitekturi
 
 
 ### Get podcast
