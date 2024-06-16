@@ -26,5 +26,10 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         dbUrl: '',
+        s3: {
+            accessKeyId: '',
+            secretAccessKey: '',
+            bucket: '',
+        }
     }
 })

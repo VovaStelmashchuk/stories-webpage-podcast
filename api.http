@@ -9,3 +9,8 @@ GET http://localhost:3000/api/podcast/asp66-google-znovu-vchyt-nas-arkhitekturi
 ### Get podcast
 
 GET https://feeds.acast.com/public/shows/android-story
+
+
+### Generetae rss
+
+GET http://localhost:3000/api/rss
