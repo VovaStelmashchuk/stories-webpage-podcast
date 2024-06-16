@@ -10,6 +10,7 @@ interface IPost extends Document {
     description: string;
     type: string;
     charters: [{ time: string, description: string }];
+    audioUrl: string;
 }
 
 const PostSchema: Schema = new Schema({
@@ -20,6 +21,7 @@ const PostSchema: Schema = new Schema({
         description: {type: String, required: false},
         type: {type: String, required: true},
         charters: {type: [{time: String, description: String}], required: false},
+        audioUrl: {type: String, required: false},
     }
 );
 

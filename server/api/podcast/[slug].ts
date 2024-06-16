@@ -39,6 +39,7 @@ export default defineEventHandler(async (event) => {
         image: posts.image_url,
         charters: charters,
         slug: posts.slug,
+        audioUrl: posts.audioUrl,
     }
 
     return {
