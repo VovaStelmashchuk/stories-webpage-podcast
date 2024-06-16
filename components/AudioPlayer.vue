@@ -1,11 +1,11 @@
 <template>
-  <div class="flex items-center justify-center w-full">
-    <button @click="togglePlay" class="p-2 mr-2 bg-blue-500 text-white rounded">
-      <span v-if="isPlaying">Pause</span>
-      <span v-else>Play</span>
+  <div class="flex items-center justify-center w-full h-32">
+    <button @click="togglePlay" class="p-2 mr-2 bg-green-500 text-white rounded-lg">
+      <Icon v-if="isPlaying" name="ph:pause-fill"/>
+      <Icon v-else name="material-symbols:play-circle-rounded"/>
     </button>
     <div class="relative w-full h-2 bg-gray-200 rounded" @click="seek($event)">
-      <div :style="{ width: `${progress}%` }" class="absolute h-2 bg-blue-500 rounded"></div>
+      <div :style="{ width: `${progress}%` }" class="absolute h-2 bg-green-500 rounded"></div>
     </div>
   </div>
 </template>

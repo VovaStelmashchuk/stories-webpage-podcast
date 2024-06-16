@@ -9,6 +9,7 @@ export default defineNuxtConfig({
         '@nuxtjs/robots',
         '@nuxtjs/seo',
         '@nuxtjs/sitemap',
+        'nuxt-icon',
     ],
     tailwindcss: {
         exposeConfig: true,
