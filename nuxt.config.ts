@@ -25,5 +25,11 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         dbUrl: '',
+        minio: {
+            endPoint: '',
+            port: '',
+            accessKey: '',
+            secretKey: '',
+        }
     }
 })
