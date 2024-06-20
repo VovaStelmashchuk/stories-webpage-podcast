@@ -12,9 +12,9 @@ export default defineEventHandler(async (event) => {
 
     try {
         const bucketName = 'story-podcast'
-        const stat = await minioClient.statObject(bucketName, key)
+        //const stat = await minioClient.statObject(bucketName, key)
         const stream = await minioClient.getObject(bucketName, key)
-        event.node.res.setHeader('Content-Type', stat.metaData['content-type'] || 'application/octet-stream')
+        event.node.res.setHeader('Content-Type', 'application/octet-stream')
         await sendStream(event, stream)
     } catch (error) {
         console.error(error)
