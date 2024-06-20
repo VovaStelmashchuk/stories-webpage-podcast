@@ -9,6 +9,7 @@ export default defineNuxtConfig({
         '@nuxtjs/robots',
         '@nuxtjs/seo',
         '@nuxtjs/sitemap',
+        'nuxt-icon',
     ],
     tailwindcss: {
         exposeConfig: true,
@@ -30,6 +31,11 @@ export default defineNuxtConfig({
             port: '',
             accessKey: '',
             secretKey: '',
+        },
+        s3: {
+            accessKeyId: '',
+            secretAccessKey: '',
+            bucket: '',
         }
     }
 })

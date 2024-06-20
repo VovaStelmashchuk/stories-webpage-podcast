@@ -1,20 +1,20 @@
 ### Get podcast list
 
-GET http://localhost:3001/api/podcast-list
+GET http://localhost:3000/api/podcast-list
+
+### Get podcast details
+GET http://localhost:3000/api/podcast/asp66-google-znovu-vchyt-nas-arkhitekturi
 
 
 ### Get podcast
-
 GET https://feeds.acast.com/public/shows/android-story
 
-### Test api
-
-GET http://localhost:3002/api/test
-
 ### Get images
-
 GET http://localhost:3000/api/images/logo.jpg
 
 ### Test get image
-
 GET https://story-podcast.ams3.cdn.digitaloceanspaces.com/logo.jpg
+
+### Generetae rss
+POST http://localhost:3000/api/rss
+

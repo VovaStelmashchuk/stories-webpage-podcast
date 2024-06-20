@@ -8,9 +8,11 @@
     "production": "nuxt start",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": ""
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.598.0",
     "@nuxt/ui": "2.16.0",
     "@nuxtjs/robots": "^3.0.0",
     "@nuxtjs/seo": "^2.0.0-rc.10",
@@ -22,11 +24,13 @@
     "mongoose": "^8.4.1",
     "nuxt": "^3.11.2",
     "nuxt-gtag": "^2.0.6",
+    "podcast": "^2.0.1",
     "vue": "^3.4.27",
     "vue-composable": "^1.0.0-beta.24",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
+    "nuxt-icon": "^0.6.10",
     "tailwindcss": "^3.4.3"
   },
   "engines": {
