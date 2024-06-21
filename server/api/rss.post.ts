@@ -2,28 +2,36 @@ import Post from "~/server/database/schemas";
 import { Podcast } from "podcast";
 import { getFileSizeInByte, uploadFile } from "../minio/minioClient";
 
+const config = useRuntimeConfig()
+
 export default defineEventHandler(async (event) => {
   const podcasts = await Post
     .find({ type: { $in: ["public"] } })
     .sort({ publish_date: -1 });
 
-  // create rss feed
+  const domain = config.domain;
+  const logoUrl = `${ domain }/files/logo.jpg`;
+
+  const description = 'Два андроїдщики, два Вови і деколи дві різні думки. Кожний подкаст ми обговорюємо нові релізи в світі android розробки, кращі і не дуже практики. Ділимося своїми думками, досвідом і деколи пробуємо не смішно жартувати. Також тут ви знайдете рекомендації початківцям, а хто давно в розробці мають тут просто гарно провести час. Якщо вам тут сподобалося то заходьте в наш telegram chat https://t.me/androidstory_chat Якщо прям сильно сподобалося закиньте там трішки грошей. https://www.patreon.com/androidstory'
+
+  const author = 'Vova and Vova';
+
   const feed = new Podcast({
     title: 'Android story',
-    description: 'Два андроїдщики, два Вови і деколи дві різні думки. Кожний подкаст ми обговорюємо нові релізи в світі android розробки, кращі і не дуже практики. Ділимося своїми думками, досвідом і деколи пробуємо не смішно жатрувати. Також тут ви знайдете рекомендації початківцям, а хто давно в розробці мають тут просто гарно провести час. Якщо вам тут сподобалося то заходьте в наш telegram chat https://t.me/androidstory_chat Якщо прям сильно сподобалося закиньте там трішки грошей. https://www.patreon.com/androidstory</p>',
-    feedUrl: 'https://story-podcast.ams3.cdn.digitaloceanspaces.com/rss.xml',
-    siteUrl: 'https://androidstory.dev',
-    imageUrl: 'https://story-podcast.ams3.cdn.digitaloceanspaces.com/logo.jpg',
-    author: 'Vova and Vova',
+    description: description,
+    feedUrl: `${ domain }/files/rss.xml`,
+    siteUrl: domain,
+    imageUrl: logoUrl,
+    author: author,
     copyright: '© 2022 Android story',
     language: 'ua',
     categories: ['Technology'],
     pubDate: 'May 20, 2012 04:00:00 GMT',
     ttl: 60,
-    itunesAuthor: 'Vova and Vova',
+    itunesAuthor: author,
     itunesType: 'episodic',
-    itunesSummary: 'Два андроїдщики, два Вови і деколи дві різні думки. Кожний подкаст ми обговорюємо нові релізи в світі android розробки, кращі і не дуже практики. Ділимося своїми думками, досвідом і деколи пробуємо не смішно жатрувати. Також тут ви знайдете рекомендації початківцям, а хто давно в розробці мають тут просто гарно провести час. Якщо вам тут сподобалося то заходьте в наш telegram chat https://t.me/androidstory_chat Якщо прям сильно сподобалося закиньте там трішки грошей. https://www.patreon.com/androidstory',
-    itunesOwner: { name: 'Vova and Vova', email: 'vovochkastelmashchuk@gmail.com' },
+    itunesSummary: description,
+    itunesOwner: { name: author, email: 'vovochkastelmashchuk@gmail.com' },
     itunesExplicit: false,
     itunesCategory: [{
       text: 'Technology',
@@ -33,7 +41,7 @@ export default defineEventHandler(async (event) => {
         text: 'Tech News',
       }],
     }],
-    itunesImage: 'https://story-podcast.ams3.cdn.digitaloceanspaces.com/logo.jpg',
+    itunesImage: logoUrl,
   });
 
   const fileSizes = await Promise.all(podcasts.map(post =>
@@ -47,12 +55,12 @@ export default defineEventHandler(async (event) => {
     if (post.charters) {
       description = '<ul>';
       post.charters.forEach(chapter => {
-        description += `<li>${chapter.time} - ${chapter.description}</li>`;
+        description += `<li>${ chapter.time } - ${ chapter.description }</li>`;
       });
       description += '</ul>';
     }
 
-    let linkToEpisode = `https://androidstory.dev/podcast/${post.slug}`;
+    let linkToEpisode = `https://androidstory.dev/podcast/${ post.slug }`;
 
     let guid = post.id.toString();
 
@@ -76,13 +84,13 @@ export default defineEventHandler(async (event) => {
       itunesEpisodeType: 'full',
       itunesSeason: 2,
       itunesEpisode: podcastCount - index,
-      itunesImage: 'https://story-podcast.ams3.cdn.digitaloceanspaces.com/logo.jpg',
-      itunesAuthor: 'Vova and Vova',
-      itunesSummary: post.description,
+      itunesImage: logoUrl,
+      itunesAuthor: author,
+      itunesSummary: description,
     });
   });
 
-  const result = await uploadFile('rss.xml', feed.buildXml()); 
+  const result = await uploadFile('rss.xml', feed.buildXml());
 
   console.log(result);
 

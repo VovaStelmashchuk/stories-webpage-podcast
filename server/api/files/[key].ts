@@ -12,8 +12,8 @@ export default defineEventHandler(async (event) => {
 
   try {
     const stream = await getObjectAsStream(key)
-    event.node.res.setHeader('Content-Type', 'image/jpeg')
-    await sendStream(event, stream)
+    event.node.res.setHeader('Content-Type', stream.contentType)
+    await sendStream(event, stream.stream)
   } catch (error) {
     console.error(error)
     throw createError({ statusCode: 500, message: 'Failed to get image URL' })

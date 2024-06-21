@@ -12,13 +12,10 @@ const minioClient = new Client({
 
 const bucketName = 'story-podcast'
 
-export async function getObjectUrl(key: string) {
-  return await minioClient.presignedGetObject(bucketName, key, 24 * 60 * 60)
-}
-
 export async function getObjectAsStream(key: string) {
-  const stream = await minioClient.getObject(bucketName, key)
-  return stream
+  const stream = await minioClient.getObject(bucketName, key);
+  const stat = await minioClient.statObject(bucketName, key);
+  return { stream, contentType: stat.metaData['content-type'] };
 }
 
 export async function getFileSizeInByte(key: string): Promise<number> {
@@ -27,7 +24,9 @@ export async function getFileSizeInByte(key: string): Promise<number> {
 }
 
 export async function uploadFile(key: string, body: string) {
-  await minioClient.putObject(bucketName, key, body)
+  await minioClient.putObject(bucketName, key, body, undefined, {
+    'Content-Type': 'text/xml',
+  })
 }
 
 

@@ -32,10 +32,6 @@ export default defineNuxtConfig({
             accessKey: '',
             secretKey: '',
         },
-        s3: {
-            accessKeyId: '',
-            secretAccessKey: '',
-            bucket: '',
-        }
+        domain: 'https://androidstory.dev',
     }
 })
