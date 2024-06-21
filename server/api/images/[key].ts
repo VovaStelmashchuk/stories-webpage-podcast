@@ -1,5 +1,5 @@
 import { defineEventHandler, createError } from 'h3'
-import { getObjectAsStream } from '~/server/minio/minioClient'
+import { getObjectAsStream } from '../../minio/minioClient'
 
 export default defineEventHandler(async (event) => {
   const param = event.context.params
