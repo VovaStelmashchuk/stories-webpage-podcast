@@ -1,5 +1,5 @@
 import { defineEventHandler, createError } from 'h3'
-import { getObjectAsString } from '~/server/minio/minioClient'
+import { getObjectAsStream } from '~/server/minio/minioClient'
 
 export default defineEventHandler(async (event) => {
   const param = event.context.params
@@ -11,8 +11,8 @@ export default defineEventHandler(async (event) => {
   const key = param.key
 
   try {
-    const stream = await getObjectAsString(key)
-    event.node.res.setHeader('Content-Type', 'application/octet-stream')
+    const stream = await getObjectAsStream(key)
+    event.node.res.setHeader('Content-Type', 'image/jpeg')
     await sendStream(event, stream)
   } catch (error) {
     console.error(error)

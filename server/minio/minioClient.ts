@@ -16,11 +16,20 @@ async function getObjectUrl(key: string) {
   return await minioClient.presignedGetObject(bucketName, key, 24 * 60 * 60)
 }
 
-async function getObjectAsString(key: string) {
+async function getObjectAsString(key: string): Promise<import("stream").Readable> {
   const stream = await minioClient.getObject(bucketName, key)
-  return stream 
+  return stream
 }
 
-export { getObjectUrl, getObjectAsString } 
+async function getFileSizeInByte(key: string): Promise<number> {
+  const stat = await minioClient.statObject(bucketName, key)
+  return stat.size
+}
+
+async function uploadFile(key: string, body: string) {
+  await minioClient.putObject(bucketName, key, body)
+}
+
+export { getObjectUrl, getObjectAsString, getFileSizeInByte, uploadFile }
 
 
