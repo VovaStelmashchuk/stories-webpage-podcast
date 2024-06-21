@@ -10,8 +10,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const posts = await Post.find({type: {$in: ["public", "patreon"]}}).sort({publish_date: -1});
-
-    const url = getObjectUrl('logo.jpg')
+    const url = await getObjectUrl('logo.jpg')
 
     const formattedPosts = posts.map(post => ({
         title: post.title,

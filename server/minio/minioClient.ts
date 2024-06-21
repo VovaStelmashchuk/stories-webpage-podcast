@@ -11,11 +11,8 @@ const minioClient = new Client({
 })
 
 async function getObjectUrl(key: string) {
-    return await minioClient.presignedGetObject('story-podcast', 'logo.jpg', 24 * 60 * 60) // 1-day expiry
+    return await minioClient.presignedGetObject('story-podcast', key, 24 * 60 * 60) // 1-day expiry
 }
 
-
-export default {
-    getObjectUrl
-}
+export {getObjectUrl}
 

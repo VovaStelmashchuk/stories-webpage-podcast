@@ -8,8 +8,7 @@
     "production": "nuxt start",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "test": "npm i"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@nuxt/ui": "2.16.0",
@@ -21,6 +20,7 @@
     "dotenv": "^16.4.5",
     "minio": "^8.0.0",
     "mongoose": "^8.4.1",
+    "nitropack": "^2.9.6",
     "nuxt": "^3.11.2",
     "nuxt-gtag": "^2.0.6",
     "podcast": "^2.0.1",
