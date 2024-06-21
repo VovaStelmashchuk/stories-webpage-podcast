@@ -10,5 +10,12 @@ const minioClient = new Client({
     secretKey: config.minio.secretKey,
 })
 
-export default minioClient
+async function getObjectUrl(key: string) {
+    return await minioClient.presignedGetObject('story-podcast', 'logo.jpg', 24 * 60 * 60) // 1-day expiry
+}
+
+
+export default {
+    getObjectUrl
+}
 

@@ -1,9 +1,10 @@
-import {HeadObjectCommand, PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
+//import {HeadObjectCommand, PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
 
 const config = useRuntimeConfig()
 
 const bucket = config.s3.bucket;
 
+/*
 const client = new S3Client({
     region: "ams3",
     credentials: {
@@ -12,25 +13,28 @@ const client = new S3Client({
     },
     endpoint: 'https://ams3.digitaloceanspaces.com',
 });
+*/
 
 
 function uploadFile(key: string, body: string) {
-    return client.send(new PutObjectCommand({
+    /*return client.send(new PutObjectCommand({
         Bucket: bucket,
         Key: key,
         Body: body,
         ContentType: 'text/xml',
         ACL: 'public-read',
-    }));
+    }));*/
 }
 
 async function getFileSizeInByte(key: string): Promise<number> {
-    const response = await client.send(new HeadObjectCommand({
+    /*const response = await client.send(new HeadObjectCommand({
         Bucket: bucket,
         Key: key,
     }));
 
-    return response.ContentLength || 0;
+    return response.ContentLength || 0;*/
+
+    return 0;
 }
 
 export default {
