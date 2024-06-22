@@ -1,4 +1,4 @@
-import { defineEventHandler, createError } from 'h3'
+import { createError, defineEventHandler } from 'h3'
 import { getObjectAsStream } from '../../minio/minioClient'
 
 export default defineEventHandler(async (event) => {
@@ -11,9 +11,9 @@ export default defineEventHandler(async (event) => {
   const key = params.key
 
   try {
-    const stream = await getObjectAsStream(key)
-    event.node.res.setHeader('Content-Type', stream.contentType)
-    await sendStream(event, stream.stream)
+    const object = await getObjectAsStream(key)
+    event.node.res.setHeader('Content-Type', object.contentType)
+    await sendStream(event, object.stream)
   } catch (error) {
     console.error(error)
     throw createError({ statusCode: 500, message: 'Failed to get image URL' })

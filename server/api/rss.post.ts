@@ -1,6 +1,7 @@
 import Post from "~/server/database/schemas";
 import { Podcast } from "podcast";
 import { getFileSizeInByte, getObjectUrl, uploadFile } from "../minio/minioClient";
+import { buildObjectURL, buildObjectURLWithHost } from "~/server/minio/utils";
 
 const config = useRuntimeConfig()
 
@@ -47,12 +48,14 @@ export default defineEventHandler(async (event) => {
   });
 
   const fileSizes = await Promise.all(podcasts.map(post =>
-    getFileSizeInByte('episodes/' + post.number + '.mp3')
+    getFileSizeInByte('episodes/' + post.audio_file_key)
   ));
 
   const podcastsUrl = await Promise.all(podcasts.map(post =>
-    getObjectUrl('episodes/' + post.audio_file_key)
+    buildObjectURLWithHost('episodes/' + post.audio_file_key)
   ));
+
+  console.log(podcastsUrl);
 
   const podcastCount = podcasts.length;
 
@@ -96,9 +99,7 @@ export default defineEventHandler(async (event) => {
     });
   });
 
-  const result = await uploadFile('rss.xml', feed.buildXml());
-
-  console.log(result);
+  await uploadFile('rss.xml', feed.buildXml());
 
   return {
     result: 'ok',

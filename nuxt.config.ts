@@ -32,6 +32,6 @@ export default defineNuxtConfig({
             accessKey: '',
             secretKey: '',
         },
-        domain: 'https://androidstory.dev',
+        host: 'https://androidstory.dev',
     }
 })
