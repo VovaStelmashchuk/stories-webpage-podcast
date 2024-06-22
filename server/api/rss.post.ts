@@ -1,7 +1,7 @@
 import Post from "~/server/database/schemas";
 import { Podcast } from "podcast";
 import { getFileSizeInByte, getObjectUrl, uploadFile } from "../minio/minioClient";
-import { buildObjectURL, buildObjectURLWithHost } from "~/server/minio/utils";
+import { buildObjectURL } from "~/server/minio/utils";
 
 const config = useRuntimeConfig()
 
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     .sort({ publish_date: -1 });
 
   const domain = config.domain;
-  const logoUrl = await getObjectUrl('logo.png')
+  const logoUrl = buildObjectURL('logo.jpg')
 
   const description = 'Два андроїдщики, два Вови і деколи дві різні думки. Кожний подкаст ми обговорюємо нові релізи в світі android розробки, кращі і не дуже практики. Ділимося своїми думками, досвідом і деколи пробуємо не смішно жартувати. Також тут ви знайдете рекомендації початківцям, а хто давно в розробці мають тут просто гарно провести час. Якщо вам тут сподобалося то заходьте в наш telegram chat https://t.me/androidstory_chat Якщо прям сильно сподобалося закиньте там трішки грошей. https://www.patreon.com/androidstory'
 
@@ -52,10 +52,8 @@ export default defineEventHandler(async (event) => {
   ));
 
   const podcastsUrl = await Promise.all(podcasts.map(post =>
-    buildObjectURLWithHost('episodes/' + post.audio_file_key)
+    buildObjectURL('episodes/' + post.audio_file_key)
   ));
-
-  console.log(podcastsUrl);
 
   const podcastCount = podcasts.length;
 

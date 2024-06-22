@@ -1,5 +1,6 @@
 import Post from '../../database/schemas';
 import { getObjectUrl } from "~/server/minio/minioClient";
+import { buildObjectURL } from "~/server/minio/utils";
 
 export default defineEventHandler(async (event) => {
   if (event.method !== 'GET') {
@@ -39,7 +40,7 @@ export default defineEventHandler(async (event) => {
     image: post.image_url,
     charters: charters,
     slug: post.slug,
-    audioUrl: await getObjectUrl(`episodes/${ post.audio_file_key }`),
+    audioUrl: buildObjectURL(`episodes/${ post.audio_file_key }`)
   }
 
   return {

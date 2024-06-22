@@ -9,7 +9,7 @@ GET http://localhost:3000/api/podcast/asp66-google-znovu-vchyt-nas-arkhitekturi
 GET https://feeds.acast.com/public/shows/android-story
 
 ### Get images
-GET http://localhost:3000/api/logo.jpg
+GET http://localhost:3000/api/files/logo.jpg
 
 ### Get rss
 GET http://localhost:3000/api/rss.xml

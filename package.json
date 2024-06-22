@@ -26,7 +26,8 @@
     "podcast": "^2.0.1",
     "vue": "^3.4.27",
     "vue-composable": "^1.0.0-beta.24",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "http-proxy": "^1.18.1"
   },
   "devDependencies": {
     "nuxt-icon": "^0.6.10",
