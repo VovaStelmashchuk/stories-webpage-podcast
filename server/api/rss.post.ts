@@ -10,23 +10,25 @@ export default defineEventHandler(async (event) => {
     .sort({ publish_date: -1 });
 
   const domain = config.domain;
-  const logoUrl = `${ domain }/files/logo.jpg`;
+  const logoUrl = `${ domain }/api/files/logo.jpg`;
 
   const description = 'Два андроїдщики, два Вови і деколи дві різні думки. Кожний подкаст ми обговорюємо нові релізи в світі android розробки, кращі і не дуже практики. Ділимося своїми думками, досвідом і деколи пробуємо не смішно жартувати. Також тут ви знайдете рекомендації початківцям, а хто давно в розробці мають тут просто гарно провести час. Якщо вам тут сподобалося то заходьте в наш telegram chat https://t.me/androidstory_chat Якщо прям сильно сподобалося закиньте там трішки грошей. https://www.patreon.com/androidstory'
 
   const author = 'Vova and Vova';
 
+  const pubDate = new Date().toUTCString();
+
   const feed = new Podcast({
     title: 'Android story',
     description: description,
-    feedUrl: `${ domain }/files/rss.xml`,
+    feedUrl: `${ domain }/api/files/rss.xml`,
     siteUrl: domain,
     imageUrl: logoUrl,
     author: author,
     copyright: '© 2022 Android story',
     language: 'ua',
     categories: ['Technology'],
-    pubDate: 'May 20, 2012 04:00:00 GMT',
+    pubDate: pubDate,
     ttl: 60,
     itunesAuthor: author,
     itunesType: 'episodic',
