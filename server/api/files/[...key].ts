@@ -2,13 +2,13 @@ import { defineEventHandler, createError } from 'h3'
 import { getObjectAsStream } from '../../minio/minioClient'
 
 export default defineEventHandler(async (event) => {
-  const param = event.context.params
+  const params = event.context.params;
 
-  if (!param) {
+  if (!params) {
     throw createError({ statusCode: 400, message: 'Missing key' })
   }
 
-  const key = param.key
+  const key = params.key
 
   try {
     const stream = await getObjectAsStream(key)

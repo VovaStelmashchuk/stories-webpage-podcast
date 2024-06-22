@@ -1,5 +1,5 @@
 import Post from '../../database/schemas';
-import { defineEventHandler, getRouterParam } from 'h3'
+import { getObjectUrl } from "~/server/minio/minioClient";
 
 export default defineEventHandler(async (event) => {
   if (event.method !== 'GET') {
@@ -18,16 +18,16 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  const posts = await Post.findOne({ slug: slug })
+  const post = await Post.findOne({ slug: slug })
 
-  if (!posts) {
+  if (!post) {
     return {
       statusCode: 404,
       body: JSON.stringify({ message: 'Podcast episode not found' })
     }
   }
 
-  const charters = posts.charters.map((charter) => {
+  const charters = post.charters.map((charter) => {
     return {
       time: charter.time,
       description: charter.description,
@@ -35,11 +35,11 @@ export default defineEventHandler(async (event) => {
   })
 
   const formattedPost = {
-    title: posts.title,
-    image: posts.image_url,
+    title: post.title,
+    image: post.image_url,
     charters: charters,
-    slug: posts.slug,
-    audioUrl: posts.audioUrl,
+    slug: post.slug,
+    audioUrl: await getObjectUrl(`episodes/${ post.audio_file_key }`),
   }
 
   return {

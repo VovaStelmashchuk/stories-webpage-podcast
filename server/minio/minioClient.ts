@@ -12,6 +12,10 @@ const minioClient = new Client({
 
 const bucketName = 'story-podcast'
 
+export async function getObjectUrl(key: string) {
+  return await minioClient.presignedGetObject(bucketName, key)
+}
+
 export async function getObjectAsStream(key: string) {
   const stream = await minioClient.getObject(bucketName, key);
   const stat = await minioClient.statObject(bucketName, key);

@@ -1,6 +1,6 @@
 import Post from "~/server/database/schemas";
 import { Podcast } from "podcast";
-import { getFileSizeInByte, uploadFile } from "../minio/minioClient";
+import { getFileSizeInByte, getObjectUrl, uploadFile } from "../minio/minioClient";
 
 const config = useRuntimeConfig()
 
@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     .sort({ publish_date: -1 });
 
   const domain = config.domain;
-  const logoUrl = `${ domain }/api/files/logo.jpg`;
+  const logoUrl = await getObjectUrl('logo.png')
 
   const description = 'Два андроїдщики, два Вови і деколи дві різні думки. Кожний подкаст ми обговорюємо нові релізи в світі android розробки, кращі і не дуже практики. Ділимося своїми думками, досвідом і деколи пробуємо не смішно жартувати. Також тут ви знайдете рекомендації початківцям, а хто давно в розробці мають тут просто гарно провести час. Якщо вам тут сподобалося то заходьте в наш telegram chat https://t.me/androidstory_chat Якщо прям сильно сподобалося закиньте там трішки грошей. https://www.patreon.com/androidstory'
 
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
   const feed = new Podcast({
     title: 'Android story',
     description: description,
-    feedUrl: `${ domain }/api/files/rss.xml`,
+    feedUrl: `${ domain }/api/rss.xml`,
     siteUrl: domain,
     imageUrl: logoUrl,
     author: author,
@@ -48,6 +48,10 @@ export default defineEventHandler(async (event) => {
 
   const fileSizes = await Promise.all(podcasts.map(post =>
     getFileSizeInByte('episodes/' + post.number + '.mp3')
+  ));
+
+  const podcastsUrl = await Promise.all(podcasts.map(post =>
+    getObjectUrl('episodes/' + post.audio_file_key)
   ));
 
   const podcastCount = podcasts.length;
@@ -77,7 +81,7 @@ export default defineEventHandler(async (event) => {
       guid: guid,
       date: date,
       enclosure: {
-        url: post.audioUrl,
+        url: podcastsUrl[index],
         size: fileSizes[index],
       },
       itunesTitle: post.title,

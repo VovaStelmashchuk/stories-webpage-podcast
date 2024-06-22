@@ -1,5 +1,5 @@
 import Post from '../database/schemas';
-import { buildImageURL } from '../minio/utils';
+import { getObjectUrl } from "~/server/minio/minioClient";
 
 export default defineEventHandler(async (event) => {
   if (event.method !== 'GET') {
@@ -10,12 +10,12 @@ export default defineEventHandler(async (event) => {
   }
 
   const posts = await Post.find({ type: { $in: ["public", "patreon"] } }).sort({ publish_date: -1 });
-  
-  const url = buildImageURL('logo.jpg');
+
+  const logoUrl = await getObjectUrl('logo.jpg');
 
   const formattedPosts = posts.map(post => ({
     title: post.title,
-    image: url,
+    image: logoUrl,
     description: post.charters.map(charter => charter.description).join(' '),
     slug: post.slug,
     type: post.type,
