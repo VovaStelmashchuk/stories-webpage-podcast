@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {defineProps, ref} from 'vue';
+import { defineProps, ref } from 'vue';
 import AudioPlayer from './AudioPlayer.vue';
 
 interface EpisodeDetails {
@@ -9,6 +9,7 @@ interface EpisodeDetails {
   slug: string;
   charters: [{ time: string, description: string }];
   audioUrl: string;
+  links: [{ url: string, title: string }];
 }
 
 defineProps({
@@ -41,12 +42,22 @@ const seekCharters = (time: string) => {
     <div class="w-full sm:w-9/12 sm:p-0 sm:m-0 mx-auto-2 lg:px-0">
       <h2 class="text-xl font-bold mb-2 text-green-500">{{ episodeDetails.title }}</h2>
       <div v-for="chapter in episodeDetails.charters" :key="chapter.time" class="flex-none mr-5 mb-2">
-        <div role="button" class="flex" @click="seekCharters(chapter.time)">
-          <p class="text-green-500 font-bold mr-2">{{ chapter.time }}</p>
-          <p class="text-black">{{ chapter.description }}</p>
+        <div role="button" class="flex items-center" @click="seekCharters(chapter.time)">
+          <p class="link-button inline-block px-6 py-2 mt-1 mb-1 text-white bg-green-500 text-center rounded hover:bg-green-600 active:bg-green-700 mr-2">
+            {{ chapter.time }}</p>
+          <p class="text-black text-lg">{{ chapter.description }}</p>
         </div>
       </div>
       <AudioPlayer ref="audioRef" :audioUrl="episodeDetails.audioUrl" class="mx-auto-2"/>
+      <div class="w-full sm:w-9/12 sm:p-0 sm:m-0 mx-auto-2 lg:px-0">
+        <h2 class="text-xl font-bold mb-2 text-green-500">Згадано в цьому випуску</h2>
+        <ul>
+          <li v-for="link in episodeDetails.links" :key="link.url">
+            <a class="link-button inline-block px-6 py-2 mt-1 mb-1 text-white bg-green-500 text-center rounded hover:bg-green-600 active:bg-green-700"
+               :href="link.url" target="_blank">{{ link.title }}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>

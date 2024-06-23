@@ -35,12 +35,20 @@ export default defineEventHandler(async (event) => {
     }
   })
 
+  const logoUrl = buildObjectURL('logo.jpg')
+
   const formattedPost = {
     title: post.title,
-    image: post.image_url,
+    image: logoUrl,
     charters: charters,
     slug: post.slug,
-    audioUrl: buildObjectURL(`episodes/${ post.audio_file_key }`)
+    audioUrl: buildObjectURL(`episodes/${ post.audio_file_key }`),
+    links: post.links.map((link) => {
+      return {
+        url: link.link,
+        title: link.title,
+      }
+    }),
   }
 
   return {
