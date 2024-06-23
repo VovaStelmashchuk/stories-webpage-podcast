@@ -1,6 +1,6 @@
-import Post from '../../database/schemas';
 import { getObjectUrl } from "~/server/minio/minioClient";
 import { buildObjectURL } from "~/server/minio/utils";
+import { Post } from "~/server/database/schemas";
 
 export default defineEventHandler(async (event) => {
   if (event.method !== 'GET') {

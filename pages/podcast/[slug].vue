@@ -25,7 +25,8 @@ export default {
 </script>
 
 <template>
-  <div class="p-2 m-2">
-    <EpisodeComponent v-if="episodeDetails" :episode-details="episodeDetails"></EpisodeComponent>
+  <div>
+    <AppHeader></AppHeader>
+    <EpisodeComponent class="mt-4" v-if="episodeDetails" :episode-details="episodeDetails"></EpisodeComponent>
   </div>
 </template>

@@ -33,7 +33,7 @@ const seekCharters = (time: string) => {
 </script>
 
 <template>
-  <div class="max-w-screen mx-auto px-4 flex flex-col md:flex-row" v-if="episodeDetails">
+  <div class="max-w-screen px-4 flex flex-col md:flex-row" v-if="episodeDetails">
     <div class="w-full sm:w-3/12 block lg:block mx-auto lg:px-4">
       <img class="aspect-square"
            :src="episodeDetails.image"

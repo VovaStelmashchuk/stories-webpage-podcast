@@ -1,9 +1,13 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'default',
+})
 </script>
 
 <template>
-  <div class="p-8 m-4">
-    <EpisodeList></EpisodeList>
+  <div>
+    <AppHeader></AppHeader>
+    <EpisodeList class="mt-4"></EpisodeList>
   </div>
 </template>
 

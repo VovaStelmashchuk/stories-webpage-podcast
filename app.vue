@@ -6,15 +6,17 @@ useSeoMeta({
 </script>
 
 <template>
-  <div id="app" class="max-h-full max-w-full">
-    <AppHeader/>
-    <NuxtPage/>
+  <div class="bg-white">
+    <NuxtLayout>
+      <NuxtPage/>
+    </NuxtLayout>
   </div>
 </template>
 
 <style scoped>
-#app {
-  background-color: #f7fafc;
-  color: #00DC82;
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
 }
+
 </style>

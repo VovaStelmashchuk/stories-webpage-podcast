@@ -29,6 +29,4 @@ const PostSchema: Schema = new Schema({
   }
 );
 
-const Post = db.model<IPost>('Post', PostSchema, 'posts');
-
-export default Post;
+export const Post = db.model<IPost>('Post', PostSchema, 'posts');

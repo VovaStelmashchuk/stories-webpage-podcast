@@ -1,6 +1,6 @@
-import Post from "~/server/database/schemas";
+import { Post } from "~/server/database/schemas";
 import { Podcast } from "podcast";
-import { getFileSizeInByte, getObjectUrl, uploadFile } from "../minio/minioClient";
+import { getFileSizeInByte, uploadFile } from "../minio/minioClient";
 import { buildObjectURL } from "~/server/minio/utils";
 
 const config = useRuntimeConfig()

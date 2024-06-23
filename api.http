@@ -23,6 +23,23 @@ POST http://localhost:3000/api/rss
 ### Get
 GET https://androidstory.dev/files/rss.xml
 
-###
-GET https://feeds.acast.com/public/shows/android-story
+### Create user
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "root",
+  "adminToken": "{{adminToken}}"
+}
+
+### Login user
+
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": ""
+}
 

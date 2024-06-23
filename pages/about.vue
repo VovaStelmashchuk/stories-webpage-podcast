@@ -2,8 +2,11 @@
 </script>
 
 <template>
-  <div class="p-8 m-4">
-    <PodcastInfo/>
+  <div>
+    <AppHeader></AppHeader>
+    <div class="mt-4">
+      <PodcastInfo/>
+    </div>
   </div>
 </template>
 
