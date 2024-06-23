@@ -24,6 +24,8 @@ export default defineEventHandler(async (event) => {
     description: description,
     feedUrl: `${ domain }/api/rss.xml`,
     siteUrl: domain,
+    webMaster: domain,
+    generator: 'Android story',
     imageUrl: logoUrl,
     author: author,
     copyright: '© 2022 Android story',
