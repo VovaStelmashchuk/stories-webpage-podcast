@@ -58,13 +58,24 @@ export default defineEventHandler(async (event) => {
   const podcastCount = podcasts.length;
 
   podcasts.forEach((post, index) => {
-    let description = '';
+    let description = 'В цьому випуску ';
     if (post.charters) {
-      description = '<ul>';
+      description += '<ul>'
       post.charters.forEach(chapter => {
-        description += `<li>${ chapter.time } - ${ chapter.description }</li>`;
+        description += `<li>${ chapter.time } - <em>${ chapter.description }</em></li>`;
       });
-      description += '</ul>';
+      description += '</ul>'
+    }
+
+    if (post.links) {
+      description += '<br>';
+      description += '<h3>Згадано в випуску</h3>';
+      description += '<ul>'
+      post.links.forEach(link => {
+        description += `<a href="${ link.link }">${ link.title }</a>`;
+        description += '<br>';
+      });
+      description += '</ul>'
     }
 
     let linkToEpisode = `https://androidstory.dev/podcast/${ post.slug }`;
