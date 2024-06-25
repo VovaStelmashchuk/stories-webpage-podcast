@@ -1,5 +1,4 @@
-import { addSessionToUser, getUserByUserName } from "~/server/database/user";
-import bcrypt from "bcrypt";
+import { addSessionToUser } from "~/server/database/user";
 
 export default defineEventHandler(async (event) => {
   const { username, password } = await readBody(event)
@@ -8,19 +7,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: 'Missing username or password' })
   }
 
-  const user = await getUserByUserName(username)
-
-  if (!user) {
-    throw createError({ statusCode: 401, message: 'Invalid username or password' })
-  }
-
-  const match = bcrypt.compareSync(password, user.password)
-
-  if (!match) {
-    throw createError({ statusCode: 401, message: 'Invalid username or password' })
-  }
-
-  const sessionId = await addSessionToUser(username)
+  const sessionId = await addSessionToUser(username, password)
 
   return {
     sessionId: sessionId

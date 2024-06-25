@@ -43,3 +43,8 @@ Content-Type: application/json
   "password": ""
 }
 
+### Get Me
+GET http://localhost:3000/api/auth/me
+Content-Type: application/json
+Authorization: Bearer
+

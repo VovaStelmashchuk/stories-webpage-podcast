@@ -2,7 +2,7 @@ import { Document, Schema } from 'mongoose';
 import db from './db';
 import bcrypt from "bcrypt";
 
-export interface IUser extends Document {
+interface IUserFull extends Document {
   username: string;
   password: string;
   sessions: Array<{
@@ -10,6 +10,10 @@ export interface IUser extends Document {
     createdAt: Date;
     expiresAt: Date;
   }>;
+}
+
+export interface IUser {
+  username: string;
 }
 
 const UserSchema: Schema = new Schema({
@@ -22,7 +26,7 @@ const UserSchema: Schema = new Schema({
   }],
 });
 
-const User = db.model<IUser>('User', UserSchema, 'users');
+const User = db.model<IUserFull>('User', UserSchema, 'users');
 
 function generateSessionId() {
   const count = 64;
@@ -35,11 +39,17 @@ function generateSessionId() {
   return result
 }
 
-export async function addSessionToUser(username: string): Promise<string> {
-  const user = await User.findOne({ username });
+export async function addSessionToUser(username: string, password: string): Promise<string> {
+  const user = await User.findOne({ username: username });
 
   if (!user) {
     throw new Error('User not found');
+  }
+
+  const match = bcrypt.compareSync(password, user.password)
+
+  if (!match) {
+    throw new Error('Invalid username or password');
   }
 
   const sessionId = generateSessionId();
@@ -58,7 +68,7 @@ export async function addSessionToUser(username: string): Promise<string> {
   return sessionId;
 }
 
-export async function createUser(username: string, password: string): Promise<IUser | null> {
+export async function createUser(username: string, password: string): Promise<IUserFull | null> {
   const saltRounds = 10;
   const salt = bcrypt.genSaltSync(saltRounds);
   const hash = bcrypt.hashSync(password, salt);
@@ -73,6 +83,23 @@ export async function createUser(username: string, password: string): Promise<IU
   return user;
 }
 
-export function getUserByUserName(username: string): Promise<IUser | null> {
-  return User.findOne({ username: username }).exec();
+export async function getUserBySessionId(sessionId: string): Promise<IUser | null> {
+  const user = await User.findOne({ 'sessions.sessionId': sessionId });
+
+  if (!user) {
+    return null;
+  }
+
+  const session = user.sessions
+    .find((session) => session.sessionId === sessionId);
+
+  if (!session || session.expiresAt < new Date()) {
+    user.sessions = user.sessions.filter((session) => session.sessionId !== sessionId);
+    await user.save();
+    return null;
+  }
+
+  return {
+    username: user.username,
+  }
 }
