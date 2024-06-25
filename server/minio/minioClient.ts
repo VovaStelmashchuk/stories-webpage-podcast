@@ -32,5 +32,3 @@ export async function uploadFile(key: string, body: string) {
     'Content-Type': 'text/xml',
   })
 }
-
-

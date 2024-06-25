@@ -21,5 +21,6 @@ export default defineEventHandler(async (event) => {
     }
 
     event.context.user = user
+    event.context.sessionId = sessionId
   }
 })

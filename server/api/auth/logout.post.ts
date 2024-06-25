@@ -1,3 +1,6 @@
+import { deleteSession } from "~/server/database/user";
+
 export default defineEventHandler(async (event) => {
-  const token = event.headers.get('Authorization')
+  const currentSessionId = event.context.sessionId
+  await deleteSession(currentSessionId)
 })

@@ -1,24 +1,13 @@
 <script setup lang="ts">
 
-interface User {
-  username: number;
-}
-
-const router = useRouter();
-
-const { data: user } = useFetch<User>('/api/auth/me', {
-  lazy: true,
-  headers: {
-    Authorization: `Bearer ${ localStorage.getItem('sessionId') }`
-  }
-})
-
 </script>
 
 <template>
-  <div>
-    <h1 class="text-black">Dashboard</h1>
-    <p class="text-black"> {{ user?.username }}</p>
+  <AdminHeader/>
+  <div class="flex justify-center items-center h-screen">
+    <div class="max-w-screen-md w-full p-5 bg-white rounded shadow-md">
+      <h1 class="text-black">Dashboard</h1>
+    </div>
   </div>
 </template>
 

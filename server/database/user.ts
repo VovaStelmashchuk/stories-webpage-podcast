@@ -103,3 +103,11 @@ export async function getUserBySessionId(sessionId: string): Promise<IUser | nul
     username: user.username,
   }
 }
+
+export async function deleteSession(sessionId: string): Promise<void> {
+  await User.updateOne({ 'sessions.sessionId': sessionId }, {
+    $pull: {
+      sessions: { sessionId: sessionId }
+    }
+  });
+}
