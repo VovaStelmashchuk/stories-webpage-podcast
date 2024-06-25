@@ -1,14 +1,15 @@
 <script setup lang="ts">
 
+import CreatePodcastButton from "~/components/CreatePodcastButton.vue";
 </script>
 
 <template>
   <AdminHeader/>
-  <div class="flex justify-center items-center h-screen">
-    <div class="max-w-screen-md w-full p-5 bg-white rounded shadow-md">
-      <h1 class="text-black">Dashboard</h1>
+  <UContainer>
+    <div class="m-4 bg-white min-h-screen">
+      <CreatePodcastButton class="w-full h-32"/>
     </div>
-  </div>
+  </UContainer>
 </template>
 
 <style scoped>
