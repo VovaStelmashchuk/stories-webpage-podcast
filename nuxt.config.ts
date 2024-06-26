@@ -34,5 +34,5 @@ export default defineNuxtConfig({
     },
     host: '',
     adminToken: '',
-  }
+  },
 })

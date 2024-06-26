@@ -1,15 +1,23 @@
 <script setup lang="ts">
 
-import CreatePodcastButton from "~/components/CreatePodcastButton.vue";
+const isOpen = ref(false)
+const name = ref('11')
+
 </script>
 
 <template>
   <AdminHeader/>
   <UContainer>
     <div class="m-4 bg-white min-h-screen">
-      <CreatePodcastButton class="w-full h-32"/>
+      <UButton block label="Create podcast" @click="isOpen = true" class="h-32 text-4xl"/>
     </div>
   </UContainer>
+  <UModal v-model="isOpen">
+    <UCard>
+      <UInput color="primary" variant="outline" placeholder="Name..." v-model="name" name="name" size="xl" gap="xl"/>
+      <UButton block label="Create podcast" class="mt-2" size="xl" gap="xl"/>
+    </UCard>
+  </UModal>
 </template>
 
 <style scoped>
