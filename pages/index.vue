@@ -7,7 +7,7 @@ definePageMeta({
 <template>
   <div>
     <AppHeader></AppHeader>
-    <EpisodeList class="mt-4"></EpisodeList>
+    <EpisodeList class="py-12"></EpisodeList>
   </div>
 </template>
 

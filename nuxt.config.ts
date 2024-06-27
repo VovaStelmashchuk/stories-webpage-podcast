@@ -4,17 +4,12 @@ export default defineNuxtConfig({
   ssr: false,
   modules: [
     '@nuxt/ui',
-    '@nuxtjs/tailwindcss',
     'nuxt-gtag',
     '@nuxtjs/robots',
     '@nuxtjs/seo',
     '@nuxtjs/sitemap',
     'nuxt-icon',
   ],
-  tailwindcss: {
-    exposeConfig: true,
-    viewer: true,
-  },
   gtag: {
     id: 'G-31X20G71GJ',
   },
@@ -23,6 +18,9 @@ export default defineNuxtConfig({
   },
   sitemap: {
     xsl: false
+  },
+  tailwindcss: {
+    configPath: 'tailwind.config.js'
   },
   runtimeConfig: {
     dbUrl: '',

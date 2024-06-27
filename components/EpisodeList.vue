@@ -2,7 +2,7 @@
 import EpisodeCard from './EpisodeCard.vue';
 import PatreonCard from './PatreonCard.vue';
 
-const {pending, data: posts} = useFetch('/api/podcast-list');
+const { pending, data: posts } = useFetch('/api/podcast-list');
 
 </script>
 

@@ -2,6 +2,9 @@ import { Document, Schema } from 'mongoose';
 
 import db from './db';
 
+import translit from "translitit-cyrillic-ukrainian-to-latin";
+import { aws4 } from "mongodb/src/deps";
+
 interface IPost extends Document {
   _id: Schema.Types.ObjectId;
   publish_date: Date;
@@ -30,3 +33,16 @@ const PostSchema: Schema = new Schema({
 );
 
 export const Post = db.model<IPost>('Post', PostSchema, 'posts');
+
+export async function createPodcast(name: string): Promise<IPost> {
+  const post = new Post({
+    publish_date: new Date(),
+    slug: translit(name),
+    title: name,
+    type: "draft",
+  });
+
+  await post.save()
+
+  return post
+}
