@@ -1,14 +1,14 @@
 <script setup lang="ts">
 
 const isOpen = ref(false)
-const name = ref('11')
+const name = ref('')
 
 </script>
 
 <template>
   <AdminHeader/>
-  <UContainer>
-    <div class="m-4 bg-white min-h-screen">
+  <UContainer class="min-h-screen">
+    <div class="m-4">
       <UButton block label="Create podcast" @click="isOpen = true" class="h-32 text-4xl"/>
     </div>
   </UContainer>

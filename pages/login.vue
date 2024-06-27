@@ -35,7 +35,6 @@ const submitForm = async () => {
     },
     onResponse({ response }) {
       const sessionId = response._data.sessionId;
-      console.log(sessionId);
       localStorage.setItem('sessionId', sessionId);
 
       router.push('/admin/dashboard');

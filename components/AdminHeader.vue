@@ -14,8 +14,8 @@ const { data: user } = useCustomFetch<User>('/api/auth/me', {
 const logout = () => {
   useCustomFetch('/api/auth/logout', {
     method: 'POST',
-  })
-  localStorage.removeItem('token');
+  });
+  localStorage.removeItem('sessionId');
   router.push('/login');
 }
 
