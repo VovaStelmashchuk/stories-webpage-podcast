@@ -3,10 +3,8 @@ import { Document, Schema } from 'mongoose';
 import db from './db';
 
 import translit from "translitit-cyrillic-ukrainian-to-latin";
-import { aws4 } from "mongodb/src/deps";
 
-interface IPost extends Document {
-  _id: Schema.Types.ObjectId;
+export interface IPost extends Document {
   publish_date: Date;
   slug: string;
   title: string;
@@ -19,7 +17,6 @@ interface IPost extends Document {
 }
 
 const PostSchema: Schema = new Schema({
-    _id: Schema.Types.ObjectId,
     publish_date: { type: Date, required: true },
     slug: { type: String, required: true },
     title: { type: String, required: true },
@@ -45,4 +42,8 @@ export async function createPodcast(name: string): Promise<IPost> {
   await post.save()
 
   return post
+}
+
+export async function getAllPodcasts(): Promise<IPost[]> {
+  return Post.find().sort({ publish_date: -1 });
 }

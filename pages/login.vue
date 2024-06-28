@@ -6,7 +6,7 @@
           Тут адмінка для обраних
         </h2>
       </div>
-      <form class="mt-8 space-y-6" @submit.prevent="submitForm">
+      <form class="mt-8 space-y-6" @submit.prevent="loginUser">
         <input v-model="username" type="text" placeholder="Username" required
                class="bg-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"/>
         <input v-model="password" type="password" placeholder="Password" required
@@ -27,18 +27,19 @@ const username = ref('');
 const password = ref('');
 const router = useRouter();
 
-const submitForm = async () => {
-  await $fetch('/api/login', {
-    onRequest({ options }) {
-      options.method = 'POST';
-      options.body = JSON.stringify({ username: username.value, password: password.value });
-    },
-    onResponse({ response }) {
-      const sessionId = response._data.sessionId;
-      localStorage.setItem('sessionId', sessionId);
+interface Session {
+  sessionId: string;
+}
 
-      router.push('/admin/dashboard');
-    }
-  })
-};
+async function loginUser() {
+  const auth = await $fetch<Session>('/api/login', {
+    method: 'POST',
+    body: JSON.stringify({ username: username.value, password: password.value }),
+  });
+
+  const sessionId = auth.sessionId;
+
+  localStorage.setItem('sessionId', sessionId);
+  await router.push('/admin/dashboard');
+}
 </script>

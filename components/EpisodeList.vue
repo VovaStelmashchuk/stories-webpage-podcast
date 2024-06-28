@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import EpisodeCard from './EpisodeCard.vue';
-import PatreonCard from './PatreonCard.vue';
 
 const { pending, data: posts } = useFetch('/api/podcast-list');
 
@@ -12,8 +10,8 @@ const { pending, data: posts } = useFetch('/api/podcast-list');
   </div>
   <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-4 max-w-screen-lg mx-auto">
     <div v-for="(episode, index) in posts.posts" :key="index">
-      <EpisodeCard v-if="episode.type === 'public'" :episode="episode"/>
-      <PatreonCard v-if="episode.type === 'patreon'" :episode="episode"/>
+      <EpisodeCardNormal v-if="episode.type === 'public'" :episode="episode"/>
+      <EpisodeCardPatreon v-if="episode.type === 'patreon'" :episode="episode"/>
     </div>
   </div>
 </template>
