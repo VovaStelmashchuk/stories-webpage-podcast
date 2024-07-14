@@ -1,0 +1,62 @@
+### Get podcast list
+
+GET http://localhost:3000/api/podcast-list
+
+### Get podcast details
+GET http://localhost:3000/api/podcast/asp66-google-znovu-vchyt-nas-arkhitekturi
+
+### Get images
+GET http://localhost:3000/api/files/logo.jpg
+
+### Get rss
+GET http://localhost:3000/api/rss.xml
+
+### Generetae rss
+POST http://localhost:3000/api/rss
+
+### Get
+GET https://androidstory.dev/files/rss.xml
+
+### Create user
+POST http://localhost:3000/api/admin/user
+Content-Type: application/json
+
+{
+  "username": "vova",
+  "password": "KjskMVQ6",
+  "adminToken": "{{adminToken}}"
+}
+
+### Login user
+
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": ""
+}
+
+### Get Me
+GET http://localhost:3000/api/auth/me
+Content-Type: application/json
+Cookie: Authentication=
+
+### update podcast
+
+PUT http://localhost:3000/api/auth/podcast/uaoetunh
+Content-Type: application/json
+Cookie: Authentication=
+
+{
+  "charters": [
+    {
+      "time": "00:00:20",
+      "description": "20 desc"
+    },
+    {
+      "time": "00:00:30",
+      "description": "30 desc"
+    }
+  ]
+}
