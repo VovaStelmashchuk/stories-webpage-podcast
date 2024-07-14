@@ -24,5 +24,3 @@ logs
 !.env.example
 
 /http-client.private.env.json
-
-scrtip.sh
