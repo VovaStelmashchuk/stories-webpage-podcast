@@ -5,33 +5,33 @@ const isLoading = ref(false)
 const name = ref('')
 const store = useAdminPodcastListStore();
 
-const createPodcast = () => {
+const createPodcast = async () => {
   isLoading.value = true
-  const { } = useFetch('/api/auth/podcast', {
+  await useFetch('/api/auth/podcast', {
     method: 'POST',
-    body: JSON.stringify({ name: name.value }),
+    body: JSON.stringify({name: name.value}),
   })
+
+  await store.fetchPodcasts();
 
   isOpen.value = false
   isLoading.value = false
-
-  store.fetchPodcasts();
 }
 
 </script>
 
 <template>
-  <AdminHeader />
+  <AdminHeader/>
   <UContainer>
-    <UButton block label="Create podcast" @click="isOpen = true" size="xl" class="m-4" />
+    <UButton block label="Create podcast" @click="isOpen = true" size="xl" class="m-4"/>
   </UContainer>
   <UModal v-model="isOpen">
     <UCard>
-      <UInput color="primary" variant="outline" placeholder="Name..." v-model="name" name="name" size="xl" gap="xl" />
-      <UButton block label="Create podcast" size="lg" @click="createPodcast" class="mt-2" :loading="isLoading" />
+      <UInput color="primary" variant="outline" placeholder="Name..." v-model="name" name="name" size="xl" gap="xl"/>
+      <UButton block label="Create podcast" size="lg" @click="createPodcast" class="mt-2" :loading="isLoading"/>
     </UCard>
   </UModal>
-  <AdminPodcastList />
+  <AdminPodcastList/>
 </template>
 
 <style scoped></style>
