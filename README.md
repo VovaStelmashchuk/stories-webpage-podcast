@@ -1,3 +1,5 @@
+Android story migrate to [YourPod](https://github.com/VovaStelmashchuk/yourpod) - fully opensource and free to use podcast hosting and manage solution.
+
 # The web application for AndroidStory podcast
 
 Visit our website at [https://androidstory.dev](https://androidstory.dev)
